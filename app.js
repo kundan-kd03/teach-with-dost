@@ -35,8 +35,16 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static("uploads"));
 
 /* ================= Routes ================= */
+// app.get("/", (req, res) => {
+//   res.send("Backend running successfullyy 🚀");
+// });
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use(express.static(path.join(__dirname, "public"))); // 👈 before routes
+
 app.get("/", (req, res) => {
-  res.send("Backend running successfullyy 🚀");
+  res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 
 app.use("/", require("./routes/authRoutes"));
