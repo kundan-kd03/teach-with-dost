@@ -1,14 +1,15 @@
 require("dotenv").config();
-
 const express = require("express");
 const session = require("express-session");
 const pgSession = require("connect-pg-simple")(session);
 const path = require("path");
-
 const pool = require("./db"); // ✅ VERY IMPORTANT
-
 const app = express();
 
+
+
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 /* ================= Middleware ================= */
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
