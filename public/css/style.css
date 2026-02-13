@@ -1,0 +1,600 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+
+body {
+  background: linear-gradient(135deg, #eef2ff, #fdf4ff);
+  min-height: 100vh;
+}
+/* =========================
+   THEME VARIABLES
+========================= */
+
+:root {
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --primary: #4f46e5;
+}
+
+/* Dark Mode Variables */
+body.dark {
+  --bg-main: #020617;       /* deep black */
+  --bg-card: #020617;
+  --text-main: #ffffff;    /* FIX: white text */
+  --text-muted: #e5e7eb;
+  --primary: #8b5cf6;
+}
+
+/* =========================
+   GLOBAL THEME APPLY
+========================= */
+
+body {
+  background: var(--bg-main);
+  color: var(--text-main);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Cards */
+.card,
+.feature-card,
+.auth-card {
+  background: var(--bg-card);
+  color: var(--text-main);
+  transition: background 0.3s ease;
+}
+
+/* Text */
+p {
+  color: var(--text-muted);
+}
+
+/* Buttons */
+.hero-btn-primary,
+.btn-custom {
+  background: linear-gradient(135deg, var(--primary), #9333ea);
+  color: #fff;
+}
+
+/* Navbar Dark Mode Enhancement */
+body.dark .navbar-custom {
+  background: linear-gradient(135deg, #020617, #0f172a);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Dark Mode Cards Glow (Aesthetic) */
+body.dark .feature-card:hover {
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.25);
+}
+
+@media (max-width: 768px) {
+  #themeToggle {
+    font-size: 0.9rem;
+    padding: 4px 8px;
+  }
+}
+
+
+/*  */
+.auth-card {
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.auth-header {
+  background: #4f46e5;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.auth-header h3 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.form-control {
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.btn-custom {
+  background: #4f46e5;
+  color: white;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.btn-custom:hover {
+  background: #4338ca;
+  color: white;
+}
+
+.link-text {
+  text-decoration: none;
+  color: #4f46e5;
+  font-weight: 500;
+}
+
+.link-text:hover {
+  text-decoration: underline;
+}
+
+
+/* ===== Aesthetic Navbar ===== */
+.navbar-custom {
+  background: linear-gradient(135deg, #4f46e5, #9333ea);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-custom .navbar-brand {
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.navbar-custom .nav-link {
+  color: #f1f5f9 !important;
+  margin: 0 6px;
+  font-weight: 500;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.navbar-custom .nav-link:hover {
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+/* underline hover animation */
+/* .navbar-custom .nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #ffffff;
+  transition: width 0.3s ease;
+}
+
+.navbar-custom .nav-link:hover::after {
+  width: 100%;
+} */
+
+
+/* Dropdown */
+.navbar-custom .dropdown-menu {
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-custom .dropdown-item {
+  font-weight: 500;
+}
+
+.navbar-custom .dropdown-item:hover {
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+/* =========================
+   HOME PAGE STYLES
+========================= */
+
+/* Hero Section */
+.hero-section {
+  padding: 90px 15px 60px;
+  text-align: center;
+  color: #1e293b;
+}
+
+.hero-section h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #1e1b4b;
+}
+
+.hero-section p {
+  font-size: 1.1rem;
+  color: #475569;
+  max-width: 700px;
+  margin: 15px auto 0;
+}
+
+/* Hero Buttons */
+.hero-btn {
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.hero-btn-primary {
+  background: linear-gradient(135deg, #4f46e5, #9333ea);
+  color: white;
+  border: none;
+}
+
+.hero-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+}
+
+.hero-btn-outline {
+  border: 2px solid #4f46e5;
+  color: #4f46e5;
+  background: transparent;
+}
+
+.hero-btn-outline:hover {
+  background: #4f46e5;
+  color: white;
+}
+
+/* Features Section */
+.features-section {
+  margin-top: 70px;
+}
+
+.feature-card {
+  border: none;
+  border-radius: 18px;
+  padding: 25px;
+  transition: all 0.35s ease;
+  background: #ffffff;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.feature-card h5 {
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #1e1b4b;
+}
+
+.feature-card p {
+  font-size: 0.95rem;
+  color: #475569;
+}
+
+/* Call To Action */
+.cta-section {
+  margin: 90px 0 60px;
+  text-align: center;
+}
+
+.cta-section h2 {
+  font-weight: 700;
+  color: #1e1b4b;
+}
+
+.cta-section p {
+  color: #64748b;
+  margin-top: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2.1rem;
+  }
+}
+
+/* Text Gradient */
+.text-gradient {
+  background: linear-gradient(135deg, #4f46e5, #9333ea);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.feature-icon {
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+}
+
+.footer-section {
+  background: #0f172a;
+  color: #cbd5f5;
+  padding: 18px 0;
+  margin-top: 80px;
+  font-size: 0.9rem;
+}
+.alert {
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+/* =========================
+   DARK MODE – CARD STYLING
+========================= */
+
+/* Light Mode (default) */
+.card,
+.feature-card,
+.auth-card {
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 16px;
+  transition: all 0.35s ease;
+}
+
+/* Dark Mode Cards */
+body.dark .card,
+body.dark .feature-card,
+body.dark .auth-card {
+  background: #020617;            /* deep black / navy */
+  color: #ffffff;                /* white text */
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(99, 102, 241, 0.15); /* soft glow */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Card text inside dark mode */
+body.dark .card p,
+body.dark .feature-card p,
+body.dark .auth-card p {
+  color: #e5e7eb; /* soft white */
+}
+
+/* Card headings */
+body.dark .card h5,
+body.dark .feature-card h5,
+body.dark .auth-card h3 {
+  color: #ffffff;
+}
+
+
+body.dark .feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.9),
+    0 0 30px rgba(139, 92, 246, 0.35);
+}
+
+/* update 6 */
+
+/* */
+/* ===== NAVBAR ALWAYS ON TOP ===== */
+.navbar-custom {
+  position: sticky;     /* or fixed */
+  top: 0;
+  z-index: 1050;        /* higher than cards & tables */
+}
+
+/* NAVBAR FIXED */
+.navbar-custom {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1050;
+}
+
+
+/* ===== DROPDOWN FIX ===== */
+.navbar-custom .dropdown-menu {
+  z-index: 1100;
+  position: absolute;
+}
+body {
+  padding-top: 70px; /* adjust to navbar height */
+}
+
+/* ===============================
+   APTITUDE PAGE – DARK MODE
+=============================== */
+
+body.dark .aptitude-card {
+  background: #020617; /* deep dark */
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.8),
+    0 0 20px rgba(59,130,246,0.25);
+}
+
+body.dark .aptitude-card h6 {
+  color: #60a5fa; /* blue question */
+}
+
+body.dark .aptitude-card .form-check-label {
+  color: #e5e7eb;
+}
+
+body.dark .aptitude-card .form-check-input:checked {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+/* Navigation buttons */
+.apt-btn {
+  min-width: 120px;
+}
+
+body.dark .apt-btn {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: #fff;
+  border: none;
+}
+
+body.dark .apt-btn-outline {
+  background: transparent;
+  border: 1px solid #60a5fa;
+  color: #60a5fa;
+}
+
+body.dark .apt-btn-outline:hover {
+  background: #60a5fa;
+  color: #020617;
+}
+/* Aptitude intro text – dark mode */
+body.dark #introCard p {
+  color: #ffffff !important;
+}
+/* End of recent edits */
+
+/* ===============================
+   DASHBOARD – DARK MODE
+=============================== */
+
+/* Page background already handled by body.dark */
+
+/* Dashboard heading */
+body.dark .container h3.text-gradient {
+  text-shadow: 0 0 12px rgba(59, 130, 246, 0.6);
+}
+
+/* Profile + Info cards */
+body.dark .dashboard-card,
+body.dark .auth-card,
+body.dark .feature-card {
+  background: #020617; /* deep navy black */
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.85),
+    0 0 20px rgba(99, 102, 241, 0.2);
+}
+
+/* Text inside cards */
+body.dark .dashboard-card p,
+body.dark .auth-card p,
+body.dark .feature-card h6 {
+  color: #e5e7eb;
+}
+
+/* Labels like College, City, Career */
+body.dark .auth-card b {
+  color: #93c5fd; /* soft blue */
+}
+
+/* Numbers (stats) */
+body.dark .feature-card h3 {
+  color: #60a5fa;
+  text-shadow: 0 0 10px rgba(96, 165, 250, 0.6);
+}
+
+/* Profile image glow */
+body.dark #dashProfilePic {
+  border: 3px solid #3b82f6;
+  box-shadow: 0 0 18px rgba(59, 130, 246, 0.6);
+}
+
+/* Buttons */
+body.dark .btn-outline-primary {
+  border-color: #60a5fa;
+  color: #60a5fa;
+}
+
+body.dark .btn-outline-primary:hover {
+  background: #60a5fa;
+  color: #020617;
+}
+
+/* Footer */
+body.dark .footer-section {
+  background: #020617;
+  color: #cbd5f5;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+/* Dark mode email & text visibility fix */
+body.dark #dashEmail,
+body.dark .text-muted {
+  color: #e5e7eb !important; /* soft white */
+}
+body.dark #dashEmail {
+  color: #93c5fd !important; /* soft blue */
+}
+
+
+/* for notiafication tost */
+/* =========================
+   TOAST NOTIFICATION
+========================= */
+#toastBox{
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 9999;
+}
+
+.toast{
+  width: 360px;
+  min-height: 70px;
+  background: #ffffff;
+  font-weight: 500;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  border-radius: 10px;
+  position: relative;
+  transform: translateX(120%);
+  animation: slideIn 0.5s ease forwards;
+}
+
+@keyframes slideIn{
+  to{
+    transform: translateX(0);
+  }
+}
+
+.toast i{
+  font-size: 28px;
+  margin-right: 15px;
+}
+
+.toast.success i{ color: #22c55e; }
+.toast.error i{ color: #ef4444; }
+.toast.invalid i{ color: #f59e0b; }
+
+.toast::after{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  width: 100%;
+  background: #22c55e;
+  animation: progress 3s linear forwards;
+}
+
+.toast.error::after{ background: #ef4444; }
+.toast.invalid::after{ background: #f59e0b; }
+
+@keyframes progress{
+  to{ width: 0; }
+}
+
+/* =========================
+   DARK MODE – TOAST
+========================= */
+body.dark .toast{
+  background: #020617;
+  color: #ffffff;
+  box-shadow: 0 0 25px rgba(139,92,246,0.35);
+}
+
+

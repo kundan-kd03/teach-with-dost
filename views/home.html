@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Teach With Dost | Learn Smart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<div id="navbar"></div>
+
+<!-- ================= HERO SECTION ================= -->
+<section class="hero-section">
+  <div class="container">
+    <h1 class="text-gradient" >Welcome to <span class="text-gradient">Teach With Dost</span></h1>
+    <p>
+      Learn smarter with <b>semester-wise notes, assignments, projects</b>
+      and guided classes — all in one place.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="/syllabus" class="btn hero-btn hero-btn-primary">
+        Explore Semesters
+      </a>
+      <a href="/dashboard" class="btn hero-btn hero-btn-outline">
+        Go to Dashboard
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FEATURES ================= -->
+<section class="features-section">
+  <div class="container">
+    <div class="row text-center">
+
+      <div class="col-md-4 mb-4">
+        <div class="feature-card h-100">
+          <div class="feature-icon">📘</div>
+          <h5>Semester-wise Notes</h5>
+          <p>
+            Easy-to-understand notes for all semesters (1–6),
+            written with exam focus.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="feature-card h-100">
+          <div class="feature-icon">📝</div>
+          <h5>Assignments</h5>
+          <p>
+            Practice assignments with structured solutions
+            to strengthen concepts.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="feature-card h-100">
+          <div class="feature-icon">🎓</div>
+          <h5>Projects & Classes</h5>
+          <p>
+            Real-world projects and expert-guided classes
+            to make you industry-ready.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Start Learning Today 🚀</h2>
+    <p>
+      Access premium content after login and
+      download notes & assignments securely.
+    </p>
+    <a href="/logout" class="btn hero-btn hero-btn-primary">
+      Logout
+    </a>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer-section">
+  <div class="container text-center">
+    <p>
+      © 2026 <b>Teach With Dost</b> · Learn Together · Grow Together
+    </p>
+  </div>
+</footer>
+
+<!-- ================= SCRIPTS ================= -->
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Load Navbar -->
+<script>
+  fetch("/partials/nav.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("navbar").innerHTML = html;
+
+      // ✅ INIT THEME TOGGLE AFTER NAV LOAD
+      initThemeToggle();
+      loadUserInNavbar();
+    })
+    .catch(err => console.error("Navbar load error:", err));
+</script>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

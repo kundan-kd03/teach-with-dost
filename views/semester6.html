@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Semester 6 | Teach With Dost</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div id="navbar"></div>
+
+<div class="container mt-5 mb-5">
+  <div class="card shadow-lg p-4">
+
+    <h3 class="text-center mb-4 text-gradient">
+      📘 Semester 6 – BCA Programme Structure
+    </h3>
+
+    <div class="table-responsive">
+      <table class="table table-bordered align-middle text-center">
+        <thead class="table-dark">
+          <tr>
+            <th>Semester</th>
+            <th>Course Code</th>
+            <th>Course Title</th>
+            <th>Credits</th>
+            <th>Notes</th>
+            <th>Assignments</th>
+            <th>Videos</th>
+            <th>Others</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <!-- 1. BCS-062 -->
+          <tr>
+            <td>VI</td>
+            <td>BCS-062</td>
+            <td>E-Commerce</td>
+            <td>4</td>
+
+            <td>
+              <div class="d-flex gap-2 justify-content-center">
+                <a href="/view/notes/semester6/BCS062_notes.pdf"
+                   class="btn btn-sm btn-outline-primary">View</a>
+                <a href="/download/notes/semester6/BCS062_notes.pdf"
+                   class="btn btn-sm btn-outline-success">Download</a>
+              </div>
+            </td>
+
+            <td>
+              <div class="d-flex gap-2 justify-content-center">
+                <a href="/view/assignments/semester6/BCS062_assignment.pdf"
+                   class="btn btn-sm btn-outline-primary">View</a>
+                <a href="/download/assignments/semester6/BCS062_assignment.pdf"
+                   class="btn btn-sm btn-outline-success">Download</a>
+              </div>
+            </td>
+
+            <td class="text-center">—</td>
+            <td class="text-center">—</td>
+          </tr>
+
+          <!-- 2. MCS-022 -->
+          <tr>
+            <td>VI</td>
+            <td>MCS-022</td>
+            <td>Operating System Concepts and Networking Management</td>
+            <td>4</td>
+
+            <td>
+              <div class="d-flex gap-2 justify-content-center">
+                <a href="/view/notes/semester6/MCS022_notes.pdf"
+                   class="btn btn-sm btn-outline-primary">View</a>
+                <a href="/download/notes/semester6/MCS022_notes.pdf"
+                   class="btn btn-sm btn-outline-success">Download</a>
+              </div>
+            </td>
+
+            <td>
+              <div class="d-flex gap-2 justify-content-center">
+                <a href="/view/assignments/semester6/MCS022_assignment.pdf"
+                   class="btn btn-sm btn-outline-primary">View</a>
+                <a href="/download/assignments/semester6/MCS022_assignment.pdf"
+                   class="btn btn-sm btn-outline-success">Download</a>
+              </div>
+            </td>
+
+            <td>
+              <div class="d-flex gap-2 justify-content-center">
+                <a href="/view/videos/semester6/MCS022_video.mp4"
+                   class="btn btn-sm btn-outline-warning">Watch</a>
+              </div>
+            </td>
+
+            <td class="text-center">—</td>
+          </tr>
+
+          <!-- 3. BCSL-063 -->
+          <tr>
+            <td>VI</td>
+            <td>BCSL-063</td>
+            <td>Operating System Concepts and Networking Management Lab</td>
+            <td>2</td>
+
+            <td class="text-center">—</td>
+
+            <td>
+              <div class="d-flex gap-2 justify-content-center">
+                <a href="/view/assignments/semester6/BCSL063_practical.pdf"
+                   class="btn btn-sm btn-outline-primary">View</a>
+                <a href="/download/assignments/semester6/BCSL063_practical.pdf"
+                   class="btn btn-sm btn-outline-success">Download</a>
+              </div>
+            </td>
+
+            <td class="text-center">—</td>
+            <td class="text-center">—</td>
+          </tr>
+
+          <!-- 4. BCSP-064 -->
+          <tr>
+            <td>VI</td>
+            <td>BCSP-064</td>
+            <td>Project</td>
+            <td>8</td>
+
+            <td class="text-center">—</td>
+            <td class="text-center">—</td>
+            <td class="text-center">—</td>
+
+            <td>
+              <div class="d-flex gap-2 justify-content-center">
+                <a href="/view/others/semester6/BCSP064_project_guidelines.pdf"
+                   class="btn btn-sm btn-outline-secondary">Guidelines</a>
+              </div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer-section text-center">
+  © 2026 Teach With Dost | Learn Smart
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Load Navbar -->
+<script>
+  fetch("/partials/nav.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("navbar").innerHTML = html;
+      if (typeof loadUserInNavbar === "function") {
+         initThemeToggle();
+        loadUserInNavbar();
+      }
+    });
+</script>
+
+<!-- Common JS -->
+<script src="/js/main.js"></script>
+
+</body>
+</html>

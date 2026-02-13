@@ -1,0 +1,135 @@
+<nav class="navbar navbar-expand-lg navbar-custom px-4 py-2">
+  <div class="container-fluid">
+    <!-- Brand -->
+    <a class="navbar-brand text-white nav-link disabled" href="#">Teach With Dost</a>
+
+    <!-- Mobile Toggle -->
+    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Content -->
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <!-- Left Links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link " href="/home">Home</a>
+        </li>
+
+        <!-- Semester Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            Semesters
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/semester1">Semester 1</a></li>
+            <li><a class="dropdown-item" href="/semester2">Semester 2</a></li>
+            <li><a class="dropdown-item" href="/semester3">Semester 3</a></li>
+            <li><a class="dropdown-item" href="/semester4">Semester 4</a></li>
+            <li><a class="dropdown-item" href="/semester5">Semester 5</a></li>
+            <li><a class="dropdown-item" href="/semester6 ">Semester 6</a></li>
+          </ul>
+        </li>
+        <!-- syllabus -->
+        <li class="nav-item">
+          <a class="nav-link" href="/syllabus">Syllabus</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="alert('coming soon')">Classes</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="alert('coming soon')">Projects</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="moreDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            More
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="moreDropdown">
+            <li>
+              <a class="dropdown-item" href="/aptitude">
+                🧠 Aptitude Test
+              </a>
+            </li>
+
+            <li>
+              <a class="dropdown-item" href="#" onclick="alert('coming soon')">
+                📊 Quiz
+              </a>
+            </li>
+
+            <li>
+              <a class="dropdown-item" href="#" onclick="alert('coming soon')">
+                📝 Mock Test
+              </a>
+            </li>
+
+            <li>
+              <a class="dropdown-item" href="#" onclick="alert('coming soon')">
+                📄 Resume Builder
+              </a>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item" href="#" onclick="alert('coming soon')">
+                ❓ Help
+              </a>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
+
+      <li class="nav-item d-none" id="userInfo">
+        <!-- USER INFO (HIDDEN BY DEFAULT) -->
+      <li id="userSection" class="nav-item d-flex align-items-center gap-2 d-none">
+
+        <!-- Profile Icon -->
+        <a href="/profile" title="Profile">
+          <img id="profilePic" src="/uploads/male.png" width="32" height="32" class="rounded-circle"
+            style="cursor:pointer">
+        </a>
+
+        <!-- Username -->
+        <span id="userName" class="nav-link disabled" style="cursor:default">
+          User
+        </span>
+      </li>
+      </li>
+
+      <!-- Right Links -->
+      <ul class="navbar-nav">
+        <!-- Guest -->
+        <li class="nav-item" id="loginLink">
+          <a class="nav-link" href="/signin">Login</a>
+        </li>
+        <li class="nav-item" id="signupLink">
+          <a class="nav-link" href="/signup">Signup</a>
+        </li>
+
+        <!-- Logged in -->
+        <li class="nav-item d-none" id="profileLink">
+          <a class="nav-link" href="/profile">Profile</a>
+        </li>
+        <li class="nav-item d-none" id="dashboardLink">
+          <a class="nav-link" href="/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item d-none" id="logoutLink">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+
+        <li class="nav-item">
+          <button id="themeToggle" class="btn btn-sm btn-outline-light ms-2" aria-label="Toggle theme">
+            🌙
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
