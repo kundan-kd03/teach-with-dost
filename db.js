@@ -1,11 +1,14 @@
 const { Pool } = require("pg");
 
-const dbPool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "teach_with_dost",
-  password: "123456789",
-  port: 5432,
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false, // ✅ Render required
+  },
 });
 
-module.exports = dbPool;
+pool.connect()
+  .then(() => console.log("DB connected successfully ✅"))
+  .catch(err => console.error("DB connection error ❌", err));
+
+module.exports = pool;

@@ -1,82 +1,49 @@
 require("dotenv").config();
-const pool = require("./db");
+
 const express = require("express");
 const session = require("express-session");
 const pgSession = require("connect-pg-simple")(session);
 const path = require("path");
 
-const app = express(); // ✅ app defined here
+const dbPool = require("./db"); // ✅ Render DATABASE_URL use karega
 
-// Middleware
+const app = express();
+
+/* ================= Middleware ================= */
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Static files (CSS, JS)
+/* ================= Static Files ================= */
 app.use(express.static(path.join(__dirname, "public")));
-
-// Body parser
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-// Serve static files from the "uploads" directory
 app.use("/uploads", express.static("uploads"));
 
-  
-
-const dbPool = require("./db"); // SAME pool
-
+/* ================= Session ================= */
 app.use(
   session({
     store: new pgSession({
-      pool: dbPool,          // ✅ USE SAME POOL
-      tableName: "session"
+      pool: dbPool,          // ✅ SAME pool (DATABASE_URL)
+      tableName: "session",
     }),
-    secret: "teach-with-dost-secret",
+    secret: process.env.JWT_SECRET || "teach-with-dost-secret",
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 1000 * 60 * 60 // 1 hour
-    }
+      maxAge: 1000 * 60 * 60, // 1 hour
+    },
   })
 );
 
+/* ================= Routes ================= */
+app.get("/", (req, res) => {
+  res.send("Backend running successfully 🚀");
+});
 
-
-
-// Session
-app.use(
-  session({
-    store: new pgSession({
-      conString: "postgres://postgres:password@localhost:5432/teach_with_dost",
-    }),
-    secret: "teach-with-dost-secret",
-    resave: false,
-    saveUninitialized: false,
-  })
-);
-
-
-
-// Routes
 app.use("/", require("./routes/authRoutes"));
-const downloadRoutes = require("./routes/downloadRoutes");
-app.use("/", downloadRoutes);
+app.use("/", require("./routes/downloadRoutes"));
 
+/* ================= Server ================= */
+const PORT = process.env.PORT || 3000;
 
-
-// Server
-const PORT = 3000;
-// clear all sessions on server restart
-(async () => {
-  try {
-    await pool.query('DELETE FROM "session"');
-    console.log("✅ Sessions cleared on restart");
-  } catch (err) {
-    console.error(err);
-  }
-})();
-
-// 👇 keep this at the bottom
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

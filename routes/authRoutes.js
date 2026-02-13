@@ -9,6 +9,24 @@ const fs = require("fs");
 const isLoggedIn = require("../middleware/auth");
 
 
+router.post("/signup", async (req, res) => {
+  try {
+    const { name, email, password, gender } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await dbPool.query(
+      "INSERT INTO users (name, email, password, gender) VALUES ($1,$2,$3,$4)",
+      [name, email, hashedPassword, gender]
+    );
+
+    res.redirect("/signin?signup=success");
+  } catch (err) {
+    console.error("Signup error:", err);
+    res.status(500).send("Signup failed");
+  }
+});
+
+
 // Profile picture upload
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -130,24 +148,6 @@ router.get("/session-status", async (req, res) => {
 });
 
 
-/* ================= SIGNUP ================= */
-router.post("/signup", async (req, res) => {
-  try {
-    const { name, email, password, gender } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    await dbPool.query(
-      "INSERT INTO users (name, email, password, gender) VALUES ($1,$2,$3,$4)",
-      [name, email, hashedPassword, gender]
-    );
-
-    res.redirect("/signin?signup=success");
-
-  } catch (err) {
-    console.error("Signup error:", err);
-    res.status(500).send("Signup failed");
-  }
-});
 
 /* ================= SIGNIN ================= */
 router.post("/signin", async (req, res) => {
