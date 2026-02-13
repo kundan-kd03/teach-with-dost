@@ -21,17 +21,18 @@ app.use("/uploads", express.static("uploads"));
 app.use(
   session({
     store: new pgSession({
-      pool: dbPool,          // ✅ SAME pool (DATABASE_URL)
-      tableName: "session",
+      pool: pool
     }),
     secret: process.env.JWT_SECRET || "teach-with-dost-secret",
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 1000 * 60 * 60, // 1 hour
-    },
+      secure: false, // Render free = false
+      maxAge: 1000 * 60 * 60
+    }
   })
 );
+
 
 /* ================= Routes ================= */
 app.get("/", (req, res) => {
