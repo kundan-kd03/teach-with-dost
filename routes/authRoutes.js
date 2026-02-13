@@ -9,23 +9,6 @@ const fs = require("fs");
 const isLoggedIn = require("../middleware/auth");
 
 
-router.post("/signup", async (req, res) => {
-  try {
-    const { name, email, password, gender } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    await dbPool.query(
-      "INSERT INTO users (name, email, password, gender) VALUES ($1,$2,$3,$4)",
-      [name, email, hashedPassword, gender]
-    );
-
-    res.redirect("/signin?signup=success");
-  } catch (err) {
-    console.error("Signup error:", err);
-    res.status(500).send("Signup failed");
-  }
-});
-
 
 // Profile picture upload
 const storage = multer.diskStorage({
@@ -39,9 +22,8 @@ const storage = multer.diskStorage({
   }
 });
 
+// Profile picture upload
 const upload = multer({
-  storage: storage,
-//   limits: { fileSize: 2 * 1024 * 1024 }, // 2MB
   storage: multer.memoryStorage(),
   fileFilter: (req, file, cb) => {
     if (
@@ -55,6 +37,7 @@ const upload = multer({
     }
   }
 });
+
 
 /* ================= LANDING PAGE ================= */
 router.get("/", (req, res) => {
@@ -76,30 +59,68 @@ router.get("/signin", (req, res) => {
   res.sendFile(path.join(__dirname, "../views/signin.html"));
 });
 
-router.get("/profile", async (req, res) => {
+router.get("/profile", (req, res) => {
   if (!req.session.user) return res.redirect("/signin");
+  res.sendFile(path.join(__dirname, "../views/profile.html"));
+});
 
+
+
+// Signup route
+router.post("/signup", async (req, res) => {
   try {
-    const userId = req.session.user.id;
+    const { name, email, password, gender } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    const result = await dbPool.query(
-      "SELECT * FROM users WHERE user_id = $1",
-      [userId]
+    await dbPool.query(
+      "INSERT INTO users (name, email, password, gender) VALUES ($1,$2,$3,$4)",
+      [name, email, hashedPassword, gender]
     );
 
-    const user = result.rows[0];
-
-    res.sendFile(path.join(__dirname, "../views/profile.html"), {
-      user: user
-    });
-
+    res.redirect("/signin?signup=success");
   } catch (err) {
-    console.error(err);
-    res.send("Error loading profile");
+    console.error("Signup error:", err);
+    res.status(500).send("Signup failed");
   }
 });
 
 
+/* ================= SIGNIN ================= */
+router.post("/signin", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const result = await dbPool.query(
+      "SELECT * FROM users WHERE email=$1",
+      [email]
+    );
+
+    if (result.rows.length === 0) {
+      return res.redirect("/signin?error=Invalid email or password");
+    }
+
+    const user = result.rows[0];
+    const match = await bcrypt.compare(password, user.password);
+
+    if (!match) {
+      return res.redirect("/signin?error=Invalid email or password");
+    }
+
+    req.session.user = {
+      id: user.user_id,
+      name: user.name,
+      gender: user.gender
+    };
+
+    res.redirect("/home?success=1");
+  } catch (err) {
+    console.error(err);
+    res.redirect("/signin?error=Something went wrong");
+  }
+});
+
+
+// api profile from db
 router.get("/api/profile", async (req, res) => {
   if (!req.session.user) {
     return res.status(401).json({ error: "Unauthorized" });
@@ -149,40 +170,6 @@ router.get("/session-status", async (req, res) => {
 
 
 
-/* ================= SIGNIN ================= */
-router.post("/signin", async (req, res) => {
-  try {
-    const { email, password } = req.body;
-
-    const result = await dbPool.query(
-      "SELECT * FROM users WHERE email=$1",
-      [email]
-    );
-
-    if (result.rows.length === 0) {
-      return res.redirect("/signin?error=Invalid email or password");
-    }
-
-    const user = result.rows[0];
-    const match = await bcrypt.compare(password, user.password);
-
-    if (!match) {
-      return res.redirect("/signin?error=Invalid email or password");
-    }
-
-    req.session.user = {
-      id: user.user_id,
-      name: user.name,
-      gender: user.gender
-    };
-
-    res.redirect("/home?success=1");
-  } catch (err) {
-    console.error(err);
-    res.redirect("/signin?error=Something went wrong");
-  }
-});
-
 
 // Profile update
 router.post(
@@ -205,6 +192,9 @@ router.post(
     } = req.body;
 
     let profilePicPath = null;
+    if (!fs.existsSync("uploads/profiles")) {
+  fs.mkdirSync("uploads/profiles", { recursive: true });
+}
 
     if (req.file) {
       const filename = `profile_${userId}_${Date.now()}.jpg`;
@@ -249,14 +239,14 @@ router.post(
     res.redirect("/profile?success=1");
   }
 );
-// syllabus
 
+
+// syllabus
 router.get("/syllabus", (req, res) => {
   res.sendFile(path.join(__dirname, "../views/syllabus.html"));
 });
 
 // Semester 1
-
 router.get("/semester1", (req, res) => {
   if (!req.session.user) {
     return res.redirect("/signin");
@@ -303,6 +293,7 @@ router.get("/semester6", (req, res) => {
   }
   res.sendFile(path.join(__dirname, "../views/semester6.html"));
 }); 
+
 //dashboard
 router.get("/dashboard", (req, res) => {
   if (!req.session.user) {

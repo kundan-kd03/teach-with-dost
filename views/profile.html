@@ -135,19 +135,12 @@
                     name="email"
                     class="form-control"
                     value=""
-                  
                   />
                 </div>
 
                 <div class="mb-4">
                   <label class="form-label">Date of Birth</label>
-                  <input
-                    id="dob"
-                    type="date"
-                    name="dob"
-                    class="form-control"
-                    
-                  />
+                  <input id="dob" type="date" name="dob" class="form-control" />
                 </div>
 
                 <div class="mb-4">
@@ -157,7 +150,6 @@
                     type="text"
                     name="career"
                     class="form-control"
-                    
                   />
                 </div>
 
@@ -222,6 +214,76 @@
         }
       }
     </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        loadProfile();
 
+        // profile image preview
+        const fileInput = document.getElementById("profile_pic");
+        if (fileInput) {
+          fileInput.addEventListener("change", previewImage);
+        }
+      });
+
+      /* ================= LOAD PROFILE DATA ================= */
+      async function loadProfile() {
+        try {
+          const res = await fetch("/api/profile");
+
+          if (res.status === 401) {
+            // not logged in
+            window.location.href = "/signin";
+            return;
+          }
+
+          const user = await res.json();
+
+          // fill inputs safely
+          setValue("name", user.name);
+          setValue("email", user.email);
+          setValue("college", user.college);
+          setValue("mobile", user.mobile);
+          setValue("linkedin", user.linkedin);
+          setValue("city", user.city);
+          setValue("dob", user.dob ? user.dob.split("T")[0] : "");
+          setValue("career", user.career);
+          setValue("gender", user.gender);
+
+          // profile picture
+          if (user.profile_pic) {
+            const img = document.getElementById("profilePreview");
+            if (img) img.src = user.profile_pic;
+          }
+        } catch (err) {
+          console.error("Profile load error:", err);
+          alert("Error loading profile");
+        }
+      }
+
+      /* ================= HELPERS ================= */
+      function setValue(id, value) {
+        const el = document.getElementById(id);
+        if (el) el.value = value || "";
+      }
+
+      /* ================= IMAGE PREVIEW ================= */
+      function previewImage(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        if (!file.type.startsWith("image/")) {
+          alert("Only image files allowed");
+          event.target.value = "";
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = () => {
+          const img = document.getElementById("profilePreview");
+          if (img) img.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    </script>
   </body>
 </html>
