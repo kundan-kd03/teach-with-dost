@@ -322,13 +322,13 @@ router.get("/api/dashboard", async (req, res) => {
     const userId = req.session.user.id;
 
     const result = await dbPool.query(
-      `SELECT 
+      `SELECT
         name,
         email,
-        college,
-        mobile,
-        city,
-        career,
+        COALESCE(college, '') AS college,
+        COALESCE(mobile, '') AS mobile,
+        COALESCE(city, '') AS city,
+        COALESCE(career, '') AS career,
         dob,
         gender,
         profile_pic
@@ -343,9 +343,9 @@ router.get("/api/dashboard", async (req, res) => {
 
     res.json({
       ...result.rows[0],
-      notes: 12,        // demo (later DB se)
-      assignments: 6,   // demo
-      tests: 3          // demo
+      notes: 12,
+      assignments: 6,
+      tests: 3
     });
 
   } catch (err) {
@@ -353,6 +353,7 @@ router.get("/api/dashboard", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+
 
 // Database connection check
 dbPool.query("SELECT 1")
